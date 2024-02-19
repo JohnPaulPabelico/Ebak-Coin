@@ -47,10 +47,10 @@ export default function Home() {
       </div>
 
       <div className="mt-5 flex justify-center items-center">
-        
         <div className={style.mintPanel}>
-        <img src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/toilet.jpg" />
-          <label htmlFor="mintAmount" className="mr-2">
+          <img src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/toilet.png" width="300"/>
+          <div className = "mt-4">      
+            <label htmlFor="mintAmount" className="mr-2">
             Mint Amount:
           </label>
           <input
@@ -69,7 +69,8 @@ export default function Home() {
             >
               {currentData != "" ? "Coins Minted!" : "Mint Coins"}
             </button>
-          </div>
+          </div></div>
+   
         </div>
       </div>
     </main>
