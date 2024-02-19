@@ -47,7 +47,9 @@ export default function Home() {
       </div>
 
       <div className="mt-5 flex justify-center items-center">
+        
         <div className={style.mintPanel}>
+        <img src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/toilet.jpg" />
           <label htmlFor="mintAmount" className="mr-2">
             Mint Amount:
           </label>
@@ -58,21 +60,18 @@ export default function Home() {
             onChange={(e) => setMintAmount(Number(e.target.value))}
             style={{ color: "black" }}
           />
-      <div className="flex justify-center items-center mt-2">
-        <button
-          onClick={() => {
-            mintCoin();
-          }}
-          className={style.buttonConnect}
-        >
-          {currentData != "" ? "Coins Minted!" : "Mint Coins"}
-        </button>
-      </div>
+          <div className="flex justify-center items-center mt-2">
+            <button
+              onClick={() => {
+                mintCoin();
+              }}
+              className={style.buttonConnect}
+            >
+              {currentData != "" ? "Coins Minted!" : "Mint Coins"}
+            </button>
+          </div>
         </div>
-        
       </div>
-
-
     </main>
   );
 }
