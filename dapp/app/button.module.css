@@ -1,0 +1,10 @@
+
+.buttonConnect {
+    color: rgb(0, 0, 0); font-size: 20px; line-height: 20px; padding: 12px; border-radius: 12px; font-family: Impact, Charcoal, sans-serif; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; background-image: radial-gradient(rgb(255, 255, 255) 0%, rgb(234, 234, 234) 100%); box-shadow: rgba(0, 0, 0, 0.36) 1px 5px 15px 5px; border: 0px none rgb(28, 110, 164); display: inline-block;}
+    .myButton:hover {
+    background: #FFFFFF; }
+    .myButton:active {
+    background: #EAEAEA; }
+
+    .mintPanel {
+        color: rgb(0, 0, 0); font-size: 20px; line-height: 20px; padding: 12px; border-radius: 12px; font-family: Impact, Charcoal, sans-serif; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; background-image: radial-gradient(rgb(0, 174, 255) 0%, rgb(55, 148, 255) 100%); box-shadow: rgba(0, 0, 0, 0.36) 1px 5px 15px 5px; border: 0px none rgb(28, 110, 164); display: inline-block;}

@@ -18,18 +18,15 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-
-    background-image: url('https://c4.wallpaperflare.com/wallpaper/541/786/553/texture-soil-backgrounds-sand-dirt-wallpaper-preview.jpg');
-    background-size: cover;
-    background-position: center;
-
+  background: 
+    linear-gradient(to bottom, rgba(199, 160, 31, 0.85), rgba(199, 160, 31, 0.85)),
+    url('https://github.com/JohnPaulPabelico/Ebak-Coin/blob/main/dapp/images/close-up-ground-texture-detail.jpg?raw=true');
+  background-size: cover;
+  background-position: center;
+  
 }
+
+
 
 @layer utilities {
   .text-balance {
