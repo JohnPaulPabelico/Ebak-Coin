@@ -65,10 +65,9 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center mt-5">
-        {/* First Mint Panel */}
         <div className={`${style.mintPanel} m-5`}>
           <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/toilet.png"
+            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/mint-leaves-mint-leaves-isolated-on-transparent-background-png.webp"
             width="300"
           />
           <div className="mt-4">
@@ -95,10 +94,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Second Mint Panel */}
         <div className={`${style.mintPanel} m-5`}>
           <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/toilet.png"
+            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/delicious-steak-on-transparent-background-generative-ai-png.png"
             width="300"
           />
           <div className="mt-4">
@@ -107,15 +105,15 @@ export default function Home() {
             </label>
             <input
               type="number"
-              id="mintAmount"
-              value={mintAmount}
-              onChange={(e) => setMintAmount(Number(e.target.value))}
+              id="stakeAmount"
+              value={stakeAmount}
+              onChange={(e) => setStakeAmount(Number(e.target.value))}
               style={{ color: "black" }}
             />
             <div className="flex justify-center items-center mt-2">
               <button
                 onClick={() => {
-                  mintCoin();
+                  stakeCoin();
                 }}
                 className={style.buttonConnect}
               >
@@ -124,6 +122,36 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className={`${style.mintPanel} m-5`}>
+          <img
+            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/delicious-steak-on-transparent-background-generative-ai-png.png"
+            width="300"
+          />
+          <div className="mt-4">
+            <label htmlFor="stakeAmount" className="mr-2">
+              Stake Amount:
+            </label>
+            <input
+              type="number"
+              id="stakeAmount"
+              value={stakeAmount}
+              onChange={(e) => setStakeAmount(Number(e.target.value))}
+              style={{ color: "black" }}
+            />
+            <div className="flex justify-center items-center mt-2">
+              <button
+                onClick={() => {
+                  stakeCoin();
+                }}
+                className={style.buttonConnect}
+              >
+                {currentMintData !== "" ? "Coins Staked!" : "Stake Coins"}
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   );
