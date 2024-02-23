@@ -9,6 +9,7 @@ contract Ebak is ERC20, Ownable {
     mapping(address => uint256) private _stakes;
     mapping(address => uint256) private _lastStakeTimestamp;
     uint256 private _rewardRate = 1;
+    uint256 private lockInPeriod = 300; //5 Minutes
 
     constructor(address initialOwner) 
         ERC20("Ebak", "TAE") 
@@ -38,6 +39,7 @@ contract Ebak is ERC20, Ownable {
   }
 
     function withdraw() public {
+        require(block.timestamp > (_lastStakeTimestamp[msg.sender] + lockInPeriod), "You cannot withdraw funds, you are still in the lock in period");
         require(_stakes[msg.sender] > 0, "No staked tokens");
 
         uint256 stakedAmount = _stakes[msg.sender];
@@ -61,8 +63,8 @@ contract Ebak is ERC20, Ownable {
         return time;
   } 
 
-    function getLastStakeTimestamp() public view returns (uint256) {
-        return _lastStakeTimestamp[msg.sender];
+    function getLastStakeTimestamp(address account) public view returns (uint256) {
+        return _lastStakeTimestamp[account];
   }
 
 
