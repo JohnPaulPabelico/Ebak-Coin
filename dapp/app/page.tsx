@@ -8,6 +8,7 @@ export default function Home() {
   const [walletKey, setwalletKey] = useState("");
   const [currentMintData, setCurrentMintData] = useState("");
   const [currentStakeData, setCurrentStakeData] = useState("");
+  const [currentWithdrawData, setCurrentWithdrawData] = useState("");
   const [mintAmount, setMintAmount] = useState<number>(0);
   const [stakeAmount, setStakeAmount] = useState<number>(0);
 
@@ -45,6 +46,22 @@ export default function Home() {
       console.log(tx);
       await tx.wait();
       setCurrentStakeData("Coins Staked!");
+    } catch (e: any) {
+      const decodedError = contract.interface.parseError(e.data);
+      alert(`Staking failed: ${decodedError?.args}`);
+    }
+  };
+
+  const withdrawCoin = async () => {
+    const { ethereum } = window as any;
+    const provider = new BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const contract = getContract(signer);
+    try {
+      const tx = await contract.withdraw();
+      console.log(tx);
+      await tx.wait();
+      setCurrentWithdrawData("Coins Withdrawed!");
     } catch (e: any) {
       const decodedError = contract.interface.parseError(e.data);
       alert(`Staking failed: ${decodedError?.args}`);
@@ -125,28 +142,18 @@ export default function Home() {
 
         <div className={`${style.mintPanel} m-5`}>
           <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/delicious-steak-on-transparent-background-generative-ai-png.png"
+            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/pngimg.com%20-%20poop_PNG3.png"
             width="300"
           />
           <div className="mt-4">
-            <label htmlFor="stakeAmount" className="mr-2">
-              Stake Amount:
-            </label>
-            <input
-              type="number"
-              id="stakeAmount"
-              value={stakeAmount}
-              onChange={(e) => setStakeAmount(Number(e.target.value))}
-              style={{ color: "black" }}
-            />
             <div className="flex justify-center items-center mt-2">
               <button
                 onClick={() => {
-                  stakeCoin();
+                  withdrawCoin();
                 }}
                 className={style.buttonConnect}
               >
-                {currentMintData !== "" ? "Coins Staked!" : "Stake Coins"}
+                {currentMintData !== "" ? "Coins Withrdawed!" : "Withdraw"}
               </button>
             </div>
           </div>
