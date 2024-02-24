@@ -1,5 +1,6 @@
 "use client";
 import { BrowserProvider } from "ethers";
+import { JsonRpcProvider } from 'ethers/providers';
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getContract } from "../config";
@@ -11,6 +12,7 @@ export default function Home() {
   const [currentWithdrawData, setCurrentWithdrawData] = useState("");
   const [mintAmount, setMintAmount] = useState<number>(0);
   const [stakeAmount, setStakeAmount] = useState<number>(0);
+  const [withdrawAmount, setWithdrawAmountData] = useState<number>(0);
 
   const connectWallet = async () => {
     const { ethereum } = window as any;
@@ -20,6 +22,8 @@ export default function Home() {
     setwalletKey(accounts[0]);
   };
 
+
+  
   const mintCoin = async () => {
     const { ethereum } = window as any;
     const provider = new BrowserProvider(ethereum);
@@ -35,6 +39,8 @@ export default function Home() {
       alert(`Minting failed: ${decodedError?.args}`);
     }
   };
+
+  
 
   const stakeCoin = async () => {
     const { ethereum } = window as any;
@@ -65,6 +71,20 @@ export default function Home() {
     } catch (e: any) {
       const decodedError = contract.interface.parseError(e.data);
       alert(`Staking failed: ${decodedError?.args}`);
+    }
+  };
+
+
+  const getWithdrawAmount = async () => {
+    const { ethereum } = window as any;
+    const provider = new JsonRpcProvider("https://sepolia-rollup.arbitrum.io/rpc");
+    const contract = getContract(provider); // Assuming getContract doesn't require a signer
+  
+    try {
+      const withdrawAmount = await contract.getWithdraw(walletKey);
+      setWithdrawAmountData(withdrawAmount);
+    } catch (e: any) {
+      console.error(`Error calling contract function: ${e.message}`);
     }
   };
 
@@ -134,7 +154,7 @@ export default function Home() {
                 }}
                 className={style.buttonConnect}
               >
-                {currentMintData !== "" ? "Coins Staked!" : "Stake Coins"}
+                {currentStakeData !== "" ? "Coins Staked!" : "Stake Coins"}
               </button>
             </div>
           </div>
@@ -153,9 +173,24 @@ export default function Home() {
                 }}
                 className={style.buttonConnect}
               >
-                {currentMintData !== "" ? "Coins Withrdawed!" : "Withdraw"}
+                {currentWithdrawData !== "" ? "Coins Withrawed!" : "Withdraw"}
               </button>
             </div>
+          </div>
+          <div>
+            
+
+            <button
+                onClick={() => {
+                  getWithdrawAmount();
+                }}
+                className={style.buttonConnect}
+              >
+                {"Refresh"}
+              </button>
+              <label htmlFor="withdrawAmount" className="mr-2">
+              Withdrawable Funds: {withdrawAmount}
+            </label>
           </div>
         </div>
 
