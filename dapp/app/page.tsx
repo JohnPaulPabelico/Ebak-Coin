@@ -21,8 +21,6 @@ export default function Home() {
     });
     setwalletKey(accounts[0]);
   };
-
-
   
   const mintCoin = async () => {
     const { ethereum } = window as any;
@@ -78,7 +76,7 @@ export default function Home() {
   const getWithdrawAmount = async () => {
     const { ethereum } = window as any;
     const provider = new JsonRpcProvider("https://sepolia-rollup.arbitrum.io/rpc");
-    const contract = getContract(provider); // Assuming getContract doesn't require a signer
+    const contract = getContract(provider); 
   
     try {
       const withdrawAmount = await contract.getWithdraw(walletKey);
