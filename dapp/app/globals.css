@@ -16,17 +16,12 @@
   }
 }
 
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: 
-    linear-gradient(to bottom, rgba(199, 160, 31, 0.85), rgba(199, 160, 31, 0.85)),
-    url('https://github.com/JohnPaulPabelico/Ebak-Coin/blob/main/dapp/images/close-up-ground-texture-detail.jpg?raw=true');
-  background-size: cover;
-  background-position: center;
-  
+  background: linear-gradient(to bottom, rgba(199, 160, 31, 0.85), rgba(199, 160, 31, 0.85)),
+    rgb(var(--background-start-rgb));
 }
-
-
 
 @layer utilities {
   .text-balance {
