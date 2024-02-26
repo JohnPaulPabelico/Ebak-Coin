@@ -70,14 +70,21 @@ export default function Home() {
     >
       <div className="absolute top-0 left-0 w-full h-20 bg-black bg-opacity-50 z-10;">
         <p className="fixed left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
-          <Image
-            src="/images/Ebak-Icon.png"
-            alt="Ebak Logo"
-            className="mr-5"
-            width={50}
-            height={44}
-            priority
-          />
+          <a
+            href="https://www.youtube.com/watch?v=Z1nufRLDQMU/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className=""
+          >
+            <Image
+              src="/images/Ebak-Icon.png"
+              alt="Ebak Logo"
+              className="mr-5"
+              width={50}
+              height={44}
+              priority
+            />
+          </a>
           <span className="font-turds text-3xl -ml-2">Ebak Coin</span>
           <button
             onClick={() => {
@@ -192,14 +199,14 @@ export default function Home() {
             />
           </a>
           <a
-            href="https://www.youtube.com/watch?v=Z1nufRLDQMU/"
+            href="https://github.com/JohnPaulPabelico/"
             target="_blank"
             rel="noopener noreferrer"
-            className='mr-3'
+            className="mr-5"
           >
             <Image
-              src="/images/Ebak-icon.png"
-              alt="Ebak Logo"
+              src="/images/githublogo.svg"
+              alt="Github Logo"
               className=""
               width={40}
               height={40}
