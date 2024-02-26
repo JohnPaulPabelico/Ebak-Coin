@@ -9,6 +9,9 @@ function Minting() {
   const [mintingAddress, setMintingAddress] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
+  const [balance, setBalance] = useState<number>();
+
+  const balanceString = balance?.toString();
 
   const mintCoin = async () => {
     const { ethereum } = window as any;
@@ -25,6 +28,27 @@ function Minting() {
       alert(`Minting failed: ${decodedError?.args}`);
     }
   };
+
+  const getBalance = async () => {
+    const { ethereum } = window as any;
+    const provider = new BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const contract = getContract(signer);
+    try {
+      const balance = await contract.balanceOf(signer);
+      const adjustedBalance = Number(balance) / 1000000000000000000;
+      setBalance(adjustedBalance);
+    } catch (e: any) {
+      console.log("Error data:", e.data);
+      if (e.data) {
+        const decodedError = contract.interface.parseError(e.data);
+        console.log(`Fetching stake failed: ${decodedError?.args}`);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
+  };
+
 
   const amountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -54,9 +78,44 @@ function Minting() {
       }}
     >
       <div className="flex justify-center items-center flex-col">
+      <div className="mb-10 minting-container flex items-center">
+          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+            Current Ebak Balance: &nbsp;{" "}
+            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
+              {balanceString}
+            </p>
+            <Image
+              src="/images/Ebak-Icon.png"
+              alt="Left Image"
+              width={30}
+              height={30}
+              className="ml-1 mb-1"
+            />
+          </p>
+          <button
+            onClick={() => {
+              getBalance();
+            }}
+          >
+            <Image
+              src="/images/refresh.svg"
+              alt="Left Image"
+              width={20}
+              height={20}
+              className="ml-4 mt-10"
+              style={{ filter: "invert(1)", transition: "transform 0.3s" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </button>
+        </div>
         <input
           type="text"
-          className="mt-10 border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
+          className="mt-1 border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
           value={mintingAddress}
           onChange={(e) => addressChange(e)}
           placeholder="Enter wallet address"
