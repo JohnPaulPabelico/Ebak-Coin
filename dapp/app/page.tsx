@@ -112,7 +112,7 @@ export default function Home() {
       <div className="relative top-14 flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900">
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
-          onClick={() => setChosenButton(0)}
+          onClick={() => walletKey ? setChosenButton(0) : setChosenButton(3)}
         >
           <h2
             className={`flex items-center justify-center font-turds text-3xl ml-auto`}
@@ -133,7 +133,7 @@ export default function Home() {
 
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
-          onClick={() => setChosenButton(1)}
+          onClick={() => walletKey ? setChosenButton(1) : setChosenButton(3)}
         >
           <h2
             className={`flex items-center justify-center font-turds text-3xl ml-auto`}
@@ -154,7 +154,7 @@ export default function Home() {
 
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
-          onClick={() => setChosenButton(2)}
+          onClick={() => walletKey ? setChosenButton(2) : setChosenButton(3)}
         >
           <h2
             className={`flex items-center justify-center font-turds text-3xl ml-auto`}
