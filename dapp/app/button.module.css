@@ -8,3 +8,22 @@
 
     .mintPanel {
         color: rgb(0, 0, 0); font-size: 20px; line-height: 20px; padding: 12px; border-radius: 12px; font-family: Impact, Charcoal, sans-serif; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; background-image: radial-gradient(rgb(0, 174, 255) 0%, rgb(55, 148, 255) 100%); box-shadow: rgba(0, 0, 0, 0.36) 1px 5px 15px 5px; border: 0px none rgb(28, 110, 164); display: inline-block;}
+
+.buttonPanel {
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+    padding-left: 1.25rem;
+    padding-right: 1.25rem; 
+    border-radius: 0.5rem; 
+    border-width: 1px; 
+    border-color: transparent; 
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms; 
+    transition-duration: 300ms; 
+
+
+}
+.buttonPanel:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}

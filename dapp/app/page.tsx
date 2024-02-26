@@ -1,18 +1,52 @@
 "use client";
 import { BrowserProvider } from "ethers";
-import { JsonRpcProvider } from 'ethers/providers';
+import { JsonRpcProvider } from "ethers/providers";
 import Image from "next/image";
+import Minting from "../components/mintingPanel";
+import Staking from "../components/stakingPanel";
+import Withdraw from "../components/withdrawPanel";
 import { useEffect, useState } from "react";
 import { getContract } from "../config";
+import Background from "../public/images/BG.png";
 import style from "./button.module.css";
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
-  const [currentMintData, setCurrentMintData] = useState("");
-  const [currentStakeData, setCurrentStakeData] = useState("");
-  const [currentWithdrawData, setCurrentWithdrawData] = useState("");
-  const [mintAmount, setMintAmount] = useState<number>(0);
-  const [stakeAmount, setStakeAmount] = useState<number>(0);
-  const [withdrawAmount, setWithdrawAmountData] = useState<number>(0);
+  const [chosenButton, setChosenButton] = useState<number>();
+
+  const showCard = () => {
+    switch (chosenButton) {
+      case 0:
+        return <Minting />;
+      case 1:
+        return <Staking />;
+      case 2:
+        return <Withdraw />;
+      default:
+        return (
+          <div
+            className="mb-20 text-2xl font-turds"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <p>Start by connecting your wallet</p>
+          </div>
+        );
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (walletKey !== "") {
+        setChosenButton(0);
+      } else {
+        setChosenButton(4);
+      }
+    }
+  }, [walletKey]);
 
   const connectWallet = async () => {
     const { ethereum } = window as any;
@@ -21,177 +55,157 @@ export default function Home() {
     });
     setwalletKey(accounts[0]);
   };
-  
-  const mintCoin = async () => {
-    const { ethereum } = window as any;
-    const provider = new BrowserProvider(ethereum);
-    const signer = await provider.getSigner();
-    const contract = getContract(signer);
-    try {
-      const tx = await contract.mint(walletKey, mintAmount);
-      console.log(tx);
-      await tx.wait();
-      setCurrentMintData("Coins Minted!");
-    } catch (e: any) {
-      const decodedError = contract.interface.parseError(e.data);
-      alert(`Minting failed: ${decodedError?.args}`);
-    }
-  };
-
-  
-
-  const stakeCoin = async () => {
-    const { ethereum } = window as any;
-    const provider = new BrowserProvider(ethereum);
-    const signer = await provider.getSigner();
-    const contract = getContract(signer);
-    try {
-      const tx = await contract.stake(stakeAmount);
-      console.log(tx);
-      await tx.wait();
-      setCurrentStakeData("Coins Staked!");
-    } catch (e: any) {
-      const decodedError = contract.interface.parseError(e.data);
-      alert(`Staking failed: ${decodedError?.args}`);
-    }
-  };
-
-  const withdrawCoin = async () => {
-    const { ethereum } = window as any;
-    const provider = new BrowserProvider(ethereum);
-    const signer = await provider.getSigner();
-    const contract = getContract(signer);
-    try {
-      const tx = await contract.withdraw();
-      console.log(tx);
-      await tx.wait();
-      setCurrentWithdrawData("Coins Withdrawed!");
-    } catch (e: any) {
-      const decodedError = contract.interface.parseError(e.data);
-      alert(`Staking failed: ${decodedError?.args}`);
-    }
-  };
-
-
-  const getWithdrawAmount = async () => {
-    const { ethereum } = window as any;
-    const provider = new JsonRpcProvider("https://sepolia-rollup.arbitrum.io/rpc");
-    const contract = getContract(provider); 
-  
-    try {
-      const withdrawAmount = await contract.getWithdraw(walletKey);
-      setWithdrawAmountData(withdrawAmount);
-    } catch (e: any) {
-      console.error(`Error calling contract function: ${e.message}`);
-    }
-  };
 
   return (
-    <main className="">
-      <div className="flex justify-center items-center">
+    <main
+      className="flex min-h-screen flex-col items-center justify-between p-12 relative"
+      style={{
+        backgroundImage: `url(${Background.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundPositionY: "80%",
+        overflow: "hidden",
+      }}
+    >
+      <div className="absolute top-0 left-0 w-full h-20 bg-black bg-opacity-50 z-10;">
+        <p className="fixed left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
+          <Image
+            src="/images/Ebak-Icon.png"
+            alt="Ebak Logo"
+            className="mr-5"
+            width={50}
+            height={44}
+            priority
+          />
+          <span className="font-turds text-3xl -ml-2">Ebak Coin</span>
+          <button
+            onClick={() => {
+              connectWallet();
+            }}
+            className="font-turds text-3xl ml-auto "
+          >
+            {walletKey !== "" && (
+              <>
+                <span className="font-turds text-3xl ml-auto">
+                  {" "}
+                  Connected:{" "}
+                </span>
+                <span className="font-sans">
+                  {walletKey.substring(0, 7)}
+                  {walletKey.length > 7 ? "..." : ""}
+                </span>
+              </>
+            )}
+            {walletKey === "" && "Connect Wallet"}
+          </button>
+        </p>
+      </div>
+
+      <div className="relative top-14 flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900">
         <button
-          onClick={() => {
-            connectWallet();
-          }}
-          className={style.buttonConnect}
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          onClick={() => setChosenButton(0)}
         >
-          {walletKey != "" ? "Connected" : "Connect Wallet"}
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/Ebak-Icon.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
+            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+              Mint{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-sm opacity-50`}>Start pooping!</p>
+        </button>
+
+        <button
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          onClick={() => setChosenButton(1)}
+        >
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/stake.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
+            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+              Stake{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-sm opacity-50`}>Eat steak and get full!</p>
+        </button>
+
+        <button
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          onClick={() => setChosenButton(2)}
+        >
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/toilet.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
+            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+              withdraw{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-sm opacity-50`}>
+            Take dump and earn rewards!
+          </p>
         </button>
       </div>
 
-      <div className="flex justify-center mt-5">
-        <div className={`${style.mintPanel} m-5`}>
-          <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/mint-leaves-mint-leaves-isolated-on-transparent-background-png.webp"
-            width="300"
-          />
-          <div className="mt-4">
-            <label htmlFor="mintAmount" className="mr-2">
-              Mint Amount:
-            </label>
-            <input
-              type="number"
-              id="mintAmount"
-              value={mintAmount}
-              onChange={(e) => setMintAmount(Number(e.target.value))}
-              style={{ color: "black" }}
+      <div className="mb-40 mt-40 ">{showCard()}</div>
+
+      <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
+        <p className="flex items-center h-full justify-spaces-between">
+          <span className="font-turds text-rl ml-2">
+            Made by yours truly John Paul Pabelico
+          </span>
+          <a
+            href="https://arbitrum.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-5 ml-auto"
+          >
+            <Image
+              src="/images/arbitrum-arb-logo.png"
+              alt="Ebak Logo"
+              className=""
+              width={40}
+              height={40}
+              priority
             />
-            <div className="flex justify-center items-center mt-2">
-              <button
-                onClick={() => {
-                  mintCoin();
-                }}
-                className={style.buttonConnect}
-              >
-                {currentMintData !== "" ? "Coins Minted!" : "Mint Coins"}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${style.mintPanel} m-5`}>
-          <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/delicious-steak-on-transparent-background-generative-ai-png.png"
-            width="300"
-          />
-          <div className="mt-4">
-            <label htmlFor="stakeAmount" className="mr-2">
-              Stake Amount:
-            </label>
-            <input
-              type="number"
-              id="stakeAmount"
-              value={stakeAmount}
-              onChange={(e) => setStakeAmount(Number(e.target.value))}
-              style={{ color: "black" }}
+          </a>
+          <a
+            href="https://www.youtube.com/watch?v=Z1nufRLDQMU"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/images/Ebak-icon.png"
+              alt="Ebak Logo"
+              className="mr-3"
+              width={40}
+              height={40}
+              priority
             />
-            <div className="flex justify-center items-center mt-2">
-              <button
-                onClick={() => {
-                  stakeCoin();
-                }}
-                className={style.buttonConnect}
-              >
-                {currentStakeData !== "" ? "Coins Staked!" : "Stake Coins"}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${style.mintPanel} m-5`}>
-          <img
-            src="https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/images/pngimg.com%20-%20poop_PNG3.png"
-            width="300"
-          />
-          <div className="mt-4">
-            <div className="flex justify-center items-center mt-2">
-              <button
-                onClick={() => {
-                  withdrawCoin();
-                }}
-                className={style.buttonConnect}
-              >
-                {currentWithdrawData !== "" ? "Coins Withrawed!" : "Withdraw"}
-              </button>
-            </div>
-          </div>
-          <div>
-            
-
-            <button
-                onClick={() => {
-                  getWithdrawAmount();
-                }}
-                className={style.buttonConnect}
-              >
-                {"Refresh"}
-              </button>
-              <label htmlFor="withdrawAmount" className="mr-2">
-              Withdrawable Funds: {withdrawAmount}
-            </label>
-          </div>
-        </div>
-
+          </a>
+        </p>
       </div>
     </main>
   );
