@@ -4,7 +4,6 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Staking() {
-  const [walletKey, setwalletKey] = useState("");
   const [stakingAmount, setStakingAmount] = useState<number>();
   const [stakedAmount, setStakedAmount] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
@@ -12,22 +11,13 @@ function Staking() {
 
   const stakedAmountString = stakedAmount?.toString();
 
-  const connectWallet = async () => {
-    const { ethereum } = window as any;
-    const accounts = await ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    setwalletKey(accounts[0]);
-  };
-
   const getStake = async () => {
     const { ethereum } = window as any;
     const provider = new BrowserProvider(ethereum);
     const signer = await provider.getSigner();
     const contract = getContract(signer);
     try {
-      const stakedInEth = await contract.getStake(walletKey);
-
+      const stakedInEth = await contract.getStake(signer);
       setStakedAmount(stakedInEth);
     } catch (e: any) {
       console.log("Error data:", e.data);
@@ -93,7 +83,6 @@ function Staking() {
           </p>
           <button
             onClick={() => {
-              connectWallet();
               getStake();
             }}
           >
@@ -154,7 +143,7 @@ function Staking() {
             <div className="minting-container flex items-center">
               <a
                 href={`https://sepolia.arbiscan.io/tx/${transactionHash}`}
-                target="_blank" // Open in a new tab/window
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="font-turds text-blue-500  cursor-pointer"
               >
