@@ -184,7 +184,7 @@ export default function Home() {
           >
             <Image
               src="/images/arbitrum-arb-logo.png"
-              alt="Ebak Logo"
+              alt="Arbitrum Logo"
               className=""
               width={40}
               height={40}
@@ -192,14 +192,15 @@ export default function Home() {
             />
           </a>
           <a
-            href="https://www.youtube.com/watch?v=Z1nufRLDQMU"
+            href="https://www.youtube.com/watch?v=Z1nufRLDQMU/"
             target="_blank"
             rel="noopener noreferrer"
+            className='mr-3'
           >
             <Image
               src="/images/Ebak-icon.png"
               alt="Ebak Logo"
-              className="mr-3"
+              className=""
               width={40}
               height={40}
               priority
