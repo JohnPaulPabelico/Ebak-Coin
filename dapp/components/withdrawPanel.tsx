@@ -4,9 +4,12 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Withdraw() {
-  const [stakingAmount, setStakingAmount] = useState<number>();
+  const [walletKey, setwalletKey] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
+
+  const withdrawAmountString = withdrawAmount?.toString();
 
   const withdrawCoin = async () => {
     const { ethereum } = window as any;
@@ -24,6 +27,34 @@ function Withdraw() {
     }
   };
 
+  const connectWallet = async () => {
+    const { ethereum } = window as any;
+    const accounts = await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    setwalletKey(accounts[0]);
+  };
+
+  const getWithdrawAmount = async () => {
+    const { ethereum } = window as any;
+    const provider = new BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const contract = getContract(signer);
+    try {
+      const withdrawAmount = await contract.getWithdraw(walletKey);
+
+      setWithdrawAmount(withdrawAmount);
+    } catch (e: any) {
+      console.log("Error data:", e.data);
+      if (e.data) {
+        const decodedError = contract.interface.parseError(e.data);
+        console.log(`Fetching stake failed: ${decodedError?.args}`);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
+  };
+
 
 
   return (
@@ -37,6 +68,36 @@ function Withdraw() {
       }}
     >
       <div className="flex justify-center items-center flex-col">
+        <div className="mb-10 minting-container flex items-center">
+          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+            Withdrawable Ebak:  &nbsp;{" "}
+            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>{withdrawAmountString}</p> 
+            <Image
+                src="/images/Ebak-Icon.png"
+                alt="Left Image"
+                width={30}
+                height={30}
+                className="ml-1 mb-1"
+              />
+          </p>
+          <button
+            onClick={() => {
+              connectWallet();
+              getWithdrawAmount();
+            }}
+          >
+            <Image
+              src="/images/refresh.svg"
+              alt="Left Image"
+              width={20}
+              height={20}
+              className="ml-4 mt-10"
+              style={{ filter: 'invert(1)', transition: 'transform 0.3s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+            />
+          </button>
+        </div>
 
         <button
           className="mt-10 flex justify-center items-center font-turds text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"

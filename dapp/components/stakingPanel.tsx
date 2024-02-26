@@ -4,9 +4,41 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Staking() {
+  const [walletKey, setwalletKey] = useState("");
   const [stakingAmount, setStakingAmount] = useState<number>();
+  const [stakedAmount, setStakedAmount] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
+
+  const stakedAmountString = stakedAmount?.toString();
+
+  const connectWallet = async () => {
+    const { ethereum } = window as any;
+    const accounts = await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    setwalletKey(accounts[0]);
+  };
+
+  const getStake = async () => {
+    const { ethereum } = window as any;
+    const provider = new BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const contract = getContract(signer);
+    try {
+      const stakedInEth = await contract.getStake(walletKey);
+
+      setStakedAmount(stakedInEth);
+    } catch (e: any) {
+      console.log("Error data:", e.data);
+      if (e.data) {
+        const decodedError = contract.interface.parseError(e.data);
+        console.log(`Fetching stake failed: ${decodedError?.args}`);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
+  };
 
   const stakeCoin = async () => {
     const { ethereum } = window as any;
@@ -34,7 +66,6 @@ function Staking() {
     }
   };
 
-
   return (
     <div
       className="flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
@@ -46,6 +77,42 @@ function Staking() {
       }}
     >
       <div className="flex justify-center items-center flex-col">
+        <div className="mb-10 minting-container flex items-center">
+          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+            Current Ebak Staked: &nbsp;{" "}
+            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
+              {stakedAmountString}
+            </p>
+            <Image
+              src="/images/Ebak-Icon.png"
+              alt="Left Image"
+              width={30}
+              height={30}
+              className="ml-1 mb-1"
+            />
+          </p>
+          <button
+            onClick={() => {
+              connectWallet();
+              getStake();
+            }}
+          >
+            <Image
+              src="/images/refresh.svg"
+              alt="Left Image"
+              width={20}
+              height={20}
+              className="ml-4 mt-10"
+              style={{ filter: "invert(1)", transition: "transform 0.3s" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </button>
+        </div>
 
         <input
           type="number"
@@ -91,7 +158,7 @@ function Staking() {
                 rel="noopener noreferrer"
                 className="font-turds text-blue-500  cursor-pointer"
               >
-                Click to View Transaction 
+                Click to View Transaction
               </a>
             </div>
           )}
