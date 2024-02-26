@@ -198,7 +198,7 @@ export default function Home() {
             className='mr-3'
           >
             <Image
-              src="/images/Ebak-icon.png"
+              src="/images/arbitrum-arb-logo.png"
               alt="Ebak Logo"
               className=""
               width={40}
