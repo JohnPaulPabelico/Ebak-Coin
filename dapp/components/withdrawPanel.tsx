@@ -4,8 +4,8 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Withdraw() {
-  const [walletKey, setwalletKey] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
+  const [elapsedStakeTime, setElapsedStakeTime] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
 
@@ -27,21 +27,13 @@ function Withdraw() {
     }
   };
 
-  const connectWallet = async () => {
-    const { ethereum } = window as any;
-    const accounts = await ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    setwalletKey(accounts[0]);
-  };
-
   const getWithdrawAmount = async () => {
     const { ethereum } = window as any;
     const provider = new BrowserProvider(ethereum);
     const signer = await provider.getSigner();
     const contract = getContract(signer);
     try {
-      const withdrawAmount = await contract.getWithdraw(walletKey);
+      const withdrawAmount = await contract.getWithdraw(signer);
 
       setWithdrawAmount(withdrawAmount);
     } catch (e: any) {
@@ -55,7 +47,25 @@ function Withdraw() {
     }
   };
 
+  const getElapsedStakeTime = async () => {
+    const { ethereum } = window as any;
+    const provider = new BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const contract = getContract(signer);
+    try {
+      const elapsedStakeTime = await contract.getElapsedStakeTime(signer);
 
+      setElapsedStakeTime(elapsedStakeTime);
+    } catch (e: any) {
+      console.log("Error data:", e.data);
+      if (e.data) {
+        const decodedError = contract.interface.parseError(e.data);
+        console.log(`Fetching stake failed: ${decodedError?.args}`);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
+  };
 
   return (
     <div
@@ -68,21 +78,22 @@ function Withdraw() {
       }}
     >
       <div className="flex justify-center items-center flex-col">
-        <div className="mb-10 minting-container flex items-center">
+        <div className="mb-3 minting-container flex items-center">
           <p className="mt-10 flex justify-center items-center font-turds text-xl">
-            Withdrawable Ebak:  &nbsp;{" "}
-            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>{withdrawAmountString}</p> 
+            Withdrawable Ebak: &nbsp;{" "}
+            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
+              {withdrawAmountString}
+            </p>
             <Image
-                src="/images/Ebak-Icon.png"
-                alt="Left Image"
-                width={30}
-                height={30}
-                className="ml-1 mb-1"
-              />
+              src="/images/Ebak-Icon.png"
+              alt="Left Image"
+              width={30}
+              height={30}
+              className="ml-1 mb-1"
+            />
           </p>
           <button
             onClick={() => {
-              connectWallet();
               getWithdrawAmount();
             }}
           >
@@ -92,9 +103,44 @@ function Withdraw() {
               width={20}
               height={20}
               className="ml-4 mt-10"
-              style={{ filter: 'invert(1)', transition: 'transform 0.3s' }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+              style={{ filter: "invert(1)", transition: "transform 0.3s" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </button>
+        </div>
+
+        <div className="mb-10 minting-container flex items-center">
+          <p className=" flex justify-center items-center font-turds text-xl ">
+            Lock Status: &nbsp;
+            <span style={{ color: elapsedStakeTime > 60 ? "lime" : "maroon" }}>
+              {elapsedStakeTime > 60
+                ? " You can poop now"
+                : " You are still constipated"}
+            </span>
+          </p>
+          <button
+            onClick={() => {
+              getElapsedStakeTime();
+            }}
+          >
+            <Image
+              src="/images/refresh.svg"
+              alt="Left Image"
+              width={20}
+              height={20}
+              className="ml-4"
+              style={{ filter: "invert(1)", transition: "transform 0.3s" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
             />
           </button>
         </div>
@@ -135,7 +181,7 @@ function Withdraw() {
                 rel="noopener noreferrer"
                 className="font-turds text-blue-500  cursor-pointer"
               >
-                Click to View Transaction 
+                Click to View Transaction
               </a>
             </div>
           )}
