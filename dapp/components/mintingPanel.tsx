@@ -4,9 +4,7 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Minting() {
-  const [mintingWalletKey, setMintingWalletKey] = useState("");
   const [mintingAmount, setMintingAmount] = useState<number>();
-  const [mintingAddress, setMintingAddress] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
   const [balance, setBalance] = useState<number>();
@@ -19,7 +17,7 @@ function Minting() {
     const signer = await provider.getSigner();
     const contract = getContract(signer);
     try {
-      const tx = await contract.mint(mintingWalletKey, mintingAmount);
+      const tx = await contract.mint(signer, mintingAmount);
       await tx.wait();
       setSubmitted(true);
       setTransactionHash(tx.hash);
@@ -49,7 +47,6 @@ function Minting() {
     }
   };
 
-
   const amountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (!isNaN(Number(inputValue))) {
@@ -58,13 +55,6 @@ function Minting() {
     } else {
       setMintingAmount(undefined);
     }
-  };
-
-  const addressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setMintingAddress(inputValue);
-    setMintingWalletKey(inputValue);
-    console.log(inputValue);
   };
 
   return (
@@ -113,18 +103,10 @@ function Minting() {
             />
           </button>
         </div>
-        <input
-          type="text"
-          className="mt-1 border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
-          value={mintingAddress}
-          onChange={(e) => addressChange(e)}
-          placeholder="Enter wallet address"
-          style={{ color: "black" }}
-        />
 
         <input
           type="number"
-          className="mt-5 border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
+          className=" border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
           value={mintingAmount}
           onChange={(e) => amountChange(e)}
           placeholder="Enter amount to mint"
