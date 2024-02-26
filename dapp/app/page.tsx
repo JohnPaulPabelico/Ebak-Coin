@@ -97,7 +97,7 @@ export default function Home() {
                 </span>
               </>
             )}
-            {(walletKey === "") && "Connect Wallet"}
+            {walletKey === "" && "Connect Wallet"}
           </button>
         </p>
       </div>
@@ -107,14 +107,16 @@ export default function Home() {
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => setChosenButton(0)}
         >
-          <h2 className={`flex items-center justify-center font-turds text-3xl ml-auto`}>
-          <Image
-                src="/images/Ebak-Icon.png"
-                alt="Left Image"
-                width={40}
-                height={40}
-                className="mr-5"
-              />
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/Ebak-Icon.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
             <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
               Mint{" "}
             </span>
@@ -126,52 +128,83 @@ export default function Home() {
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => setChosenButton(1)}
         >
-          <h2 className={`flex items-center justify-center font-turds text-3xl ml-auto`}>
-          <Image
-                src="/images/stake.png"
-                alt="Left Image"
-                width={40}
-                height={40}
-                className="mr-5"
-              />
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/stake.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
             <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
               Stake{" "}
             </span>
           </h2>
-          <p className={`m-0 text-sm opacity-50`}>
-            Eat steak and earn more ebak!
-          </p>
+          <p className={`m-0 text-sm opacity-50`}>Eat steak and get full!</p>
         </button>
 
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => setChosenButton(2)}
         >
-          <h2 className={`flex items-center justify-center font-turds text-3xl ml-auto`}>
-          <Image
-                src="/images/toilet.png"
-                alt="Left Image"
-                width={40}
-                height={40}
-                className="mr-5"
-              />
+          <h2
+            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+          >
+            <Image
+              src="/images/toilet.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-5"
+            />
             <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
               withdraw{" "}
             </span>
           </h2>
           <p className={`m-0 text-sm opacity-50`}>
-            Get your ebak back and rewards!
+            Take dump and earn rewards!
           </p>
         </button>
       </div>
 
       <div className="mb-40 mt-40 ">{showCard()}</div>
 
-      <div className="absolute bottom-0 left-0 w-full h-10 bg-black bg-opacity-50 z-10;">
+      <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
         <p className="flex items-center h-full justify-spaces-between">
           <span className="font-turds text-rl ml-2">
             Made by yours truly John Paul Pabelico
           </span>
+          <a
+            href="https://arbitrum.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-5 ml-auto"
+          >
+            <Image
+              src="/images/arbitrum-arb-logo.png"
+              alt="Ebak Logo"
+              className=""
+              width={40}
+              height={40}
+              priority
+            />
+          </a>
+          <a
+            href="https://www.youtube.com/watch?v=Z1nufRLDQMU"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/images/Ebak-icon.png"
+              alt="Ebak Logo"
+              className="mr-3"
+              width={40}
+              height={40}
+              priority
+            />
+          </a>
         </p>
       </div>
     </main>
