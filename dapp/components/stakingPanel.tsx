@@ -105,7 +105,7 @@ function Staking() {
 
         <input
           type="number"
-          className="mt-5 border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
+          className="border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
           value={stakingAmount}
           onChange={(e) => amountChange(e)}
           placeholder="Enter amount to stake"
