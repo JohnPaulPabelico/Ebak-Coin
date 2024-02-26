@@ -9,7 +9,7 @@ contract Ebak is ERC20, Ownable {
     mapping(address => uint256) private _stakes;
     mapping(address => uint256) private _lastStakeTimestamp;
     uint256 private _rewardRate = 1;
-    uint256 private lockInPeriod = 300; //5 Minutes
+    uint256 private lockInPeriod = 60; //1 min
 
     constructor(address initialOwner) 
         ERC20("Ebak", "TAE") 
