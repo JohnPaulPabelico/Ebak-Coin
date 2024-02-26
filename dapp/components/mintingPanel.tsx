@@ -118,7 +118,7 @@ function Minting() {
         >
           MINT
         </button>
-        <div className="mt-5 mb-4">
+        <div className="mt-5">
           {submitted && (
             <div className="minting-container flex items-center">
               <Image
