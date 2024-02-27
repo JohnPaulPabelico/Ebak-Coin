@@ -4,10 +4,10 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Minting() {
-  const [mintingAmount, setMintingAmount] = useState<number>();
+  const [mintingAmount, setMintingAmount] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
-  const [balance, setBalance] = useState<number>();
+  const [balance, setBalance] = useState<number>(0);
 
   const balanceString = balance?.toString();
 
@@ -32,12 +32,6 @@ function Minting() {
           },
         },
       });
-
-      if (wasAdded) {
-        console.log("Thanks for your interest!");
-      } else {
-        console.log("Your loss!");
-      }
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +79,7 @@ function Minting() {
       setMintingAmount(Number(inputValue));
       console.log(inputValue);
     } else {
-      setMintingAmount(undefined);
+      setMintingAmount(0);
     }
   };
 
@@ -101,7 +95,7 @@ function Minting() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <p className="mt-5 flex justify-center items-center font-turds text-xl">
+          <span className="mt-5 flex justify-center items-center font-turds text-xl">
             Current Ebak Balance: &nbsp;{" "}
             <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
               {balanceString}
@@ -113,7 +107,7 @@ function Minting() {
               height={30}
               className="ml-1 mb-1"
             />
-          </p>
+          </span>
           <button
             onClick={() => {
               getBalance();
@@ -138,6 +132,7 @@ function Minting() {
 
         <input
           type="number"
+          inputMode="numeric"
           className=" border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
           value={mintingAmount}
           onChange={(e) => amountChange(e)}

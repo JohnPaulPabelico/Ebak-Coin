@@ -4,7 +4,7 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Staking() {
-  const [stakingAmount, setStakingAmount] = useState<number>();
+  const [stakingAmount, setStakingAmount] = useState<number>(0);
   const [stakedAmount, setStakedAmount] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
@@ -52,7 +52,7 @@ function Staking() {
       setStakingAmount(Number(inputValue));
       console.log(inputValue);
     } else {
-      setStakingAmount(undefined);
+      setStakingAmount(0);
     }
   };
 
@@ -68,7 +68,7 @@ function Staking() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+          <span className="mt-10 flex justify-center items-center font-turds text-xl">
             Current Ebak Staked: &nbsp;{" "}
             <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
               {stakedAmountString}
@@ -80,7 +80,7 @@ function Staking() {
               height={30}
               className="ml-1 mb-1"
             />
-          </p>
+          </span>
           <button
             onClick={() => {
               getStake();

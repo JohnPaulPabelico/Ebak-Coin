@@ -79,7 +79,7 @@ function Withdraw() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-3 minting-container flex items-center">
-          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+          <span className="mt-10 flex justify-center items-center font-turds text-xl">
             Withdrawable Ebak: &nbsp;{" "}
             <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
               {withdrawAmountString}
@@ -91,7 +91,7 @@ function Withdraw() {
               height={30}
               className="ml-1 mb-1"
             />
-          </p>
+          </span>
           <button
             onClick={() => {
               getWithdrawAmount();
