@@ -132,7 +132,6 @@ function Minting() {
 
         <input
           type="number"
-          inputMode="numeric"
           className=" border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
           value={mintingAmount}
           onChange={(e) => amountChange(e)}
