@@ -101,7 +101,7 @@ function Minting() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <p className="mt-10 flex justify-center items-center font-turds text-xl">
+          <p className="mt-5 flex justify-center items-center font-turds text-xl">
             Current Ebak Balance: &nbsp;{" "}
             <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
               {balanceString}
@@ -124,7 +124,7 @@ function Minting() {
               alt="Left Image"
               width={20}
               height={20}
-              className="ml-4 mt-10"
+              className="ml-4 mt-5"
               style={{ filter: "invert(1)", transition: "transform 0.3s" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "scale(1.1)";
