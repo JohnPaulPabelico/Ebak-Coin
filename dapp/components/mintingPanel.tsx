@@ -11,6 +11,38 @@ function Minting() {
 
   const balanceString = balance?.toString();
 
+  const addToken = async () => {
+    const { ethereum } = window as any;
+    const tokenAddress = "0xaA5B2ccF4Bf2A73117A5BFF1bFe2010BFc7A69c8";
+    const tokenSymbol = "TAE";
+    const tokenDecimals = 18;
+    const tokenImage =
+      "https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/public/images/Ebak-Icon.png";
+
+    try {
+      const wasAdded = await ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: tokenAddress,
+            symbol: tokenSymbol,
+            decimals: tokenDecimals,
+            image: tokenImage,
+          },
+        },
+      });
+
+      if (wasAdded) {
+        console.log("Thanks for your interest!");
+      } else {
+        console.log("Your loss!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const mintCoin = async () => {
     const { ethereum } = window as any;
     const provider = new BrowserProvider(ethereum);
@@ -68,7 +100,7 @@ function Minting() {
       }}
     >
       <div className="flex justify-center items-center flex-col">
-      <div className="mb-10 minting-container flex items-center">
+        <div className="mb-10 minting-container flex items-center">
           <p className="mt-10 flex justify-center items-center font-turds text-xl">
             Current Ebak Balance: &nbsp;{" "}
             <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
@@ -114,7 +146,9 @@ function Minting() {
         />
         <button
           className="mt-10 flex justify-center items-center font-turds text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
-          onClick={mintCoin}
+          onClick={() => {
+            mintCoin();
+          }}
         >
           MINT
         </button>
@@ -139,7 +173,7 @@ function Minting() {
             </div>
           )}
         </div>
-        <div className="mb-4">
+        <div className="">
           {submitted && (
             <div className="minting-container flex items-center">
               <a
@@ -148,8 +182,21 @@ function Minting() {
                 rel="noopener noreferrer"
                 className="font-turds text-blue-500  cursor-pointer"
               >
-                Click to View Transaction 
+                Click to View Transaction
               </a>
+            </div>
+          )}
+        </div>
+        <div className="font-turds text-lime-400  cursor-pointer">
+          {submitted && (
+            <div className="minting-container flex items-center">
+              <button
+                onClick={() => {
+                  addToken();
+                }}
+              >
+                Import Token to Metamask
+              </button>
             </div>
           )}
         </div>
