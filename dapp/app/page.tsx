@@ -24,7 +24,7 @@ export default function Home() {
       default:
         return (
           <div
-            className="mb-20 text-2xl font-turds"
+            className="text-white mb-20 text-2xl font-turds"
             style={{
               position: "absolute",
               top: "50%",
@@ -114,12 +114,12 @@ export default function Home() {
               priority
             />
           </a>
-          <span className="font-turds text-3xl -ml-2">Ebak Coin</span>
+          <span className="text-white font-turds text-3xl -ml-2">Ebak Coin</span>
           <button
             onClick={() => {
               connectWallet();
             }}
-            className="font-turds text-3xl ml-auto "
+            className="text-white font-turds text-3xl ml-auto "
           >
             {walletKey !== "" && (
               <>
@@ -138,13 +138,13 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="relative top-14 flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900">
+      <div className="text-white relative top-14 flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900">
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
           >
             <Image
               src="/images/Ebak-Icon.png"
@@ -157,7 +157,7 @@ export default function Home() {
               Mint{" "}
             </span>
           </h2>
-          <p className={`m-0 text-sm opacity-50`}>Start pooping!</p>
+          <p className={`m-0 text-white text-sm opacity-50`}>Start pooping!</p>
         </button>
 
         <button
@@ -165,7 +165,7 @@ export default function Home() {
           onClick={() => (walletKey ? setChosenButton(1) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
           >
             <Image
               src="/images/stake.png"
@@ -178,7 +178,7 @@ export default function Home() {
               Stake{" "}
             </span>
           </h2>
-          <p className={`m-0 text-sm opacity-50`}>Eat steak and get full!</p>
+          <p className={`m-0 text-white text-sm opacity-50`}>Eat steak and get full!</p>
         </button>
 
         <button
@@ -186,7 +186,7 @@ export default function Home() {
           onClick={() => (walletKey ? setChosenButton(2) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
           >
             <Image
               src="/images/toilet.png"
@@ -199,7 +199,7 @@ export default function Home() {
               withdraw{" "}
             </span>
           </h2>
-          <p className={`m-0 text-sm opacity-50`}>
+          <p className={`m-0 text-white text-sm opacity-50`}>
             Take dump and earn rewards!
           </p>
         </button>
@@ -209,7 +209,7 @@ export default function Home() {
 
       <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
         <p className="flex items-center h-full justify-spaces-between">
-          <span className="font-turds text-rl ml-2">
+          <span className="font-turds text-white text-rl ml-2">
             Made by yours truly John Paul Pabelico
           </span>
           <a

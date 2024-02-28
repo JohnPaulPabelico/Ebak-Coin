@@ -85,7 +85,7 @@ function Minting() {
 
   return (
     <div
-      className="flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="flex grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
       style={{
         position: "absolute",
         top: "50%",
@@ -95,9 +95,9 @@ function Minting() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <span className="mt-5 flex justify-center items-center font-turds text-xl">
+          <span className="mt-5 flex justify-center items-center font-turds text-white text-xl">
             Current Ebak Balance: &nbsp;{" "}
-            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
+            <p className="font-sans text-white text-3xl" style={{ marginTop: "-4px" }}>
               {balanceString}
             </p>
             <Image
@@ -139,7 +139,7 @@ function Minting() {
           style={{ color: "black" }}
         />
         <button
-          className="mt-10 flex justify-center items-center font-turds text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
+          className="mt-10 flex justify-center items-center font-turds text-white text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
           onClick={() => {
             mintCoin();
           }}
@@ -156,7 +156,7 @@ function Minting() {
                 height={40}
                 className="mr-5"
               />
-              <p className="font-turds">Minting successful!</p>
+              <p className="font-turds text-white">Minting successful!</p>
               <Image
                 src="/images/Ebak-Icon.png"
                 alt="Left Image"

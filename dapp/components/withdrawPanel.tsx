@@ -69,7 +69,7 @@ function Withdraw() {
 
   return (
     <div
-      className="flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="text-white flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
       style={{
         position: "absolute",
         top: "50%",
@@ -79,9 +79,9 @@ function Withdraw() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-3 minting-container flex items-center">
-          <span className="mt-10 flex justify-center items-center font-turds text-xl">
+          <span className="mt-10 flex justify-center items-center font-turds text-white text-xl">
             Withdrawable Ebak: &nbsp;{" "}
-            <p className="font-sans text-3xl" style={{ marginTop: "-4px" }}>
+            <p className="font-sans text-white text-3xl" style={{ marginTop: "-4px" }}>
               {withdrawAmountString}
             </p>
             <Image
@@ -115,7 +115,7 @@ function Withdraw() {
         </div>
 
         <div className="mb-10 minting-container flex items-center">
-          <p className=" flex justify-center items-center font-turds text-xl ">
+          <p className=" flex justify-center items-center font-turds text-white text-xl ">
             Lock Status: &nbsp;
             <span style={{ color: elapsedStakeTime > 60 ? "lime" : "maroon" }}>
               {elapsedStakeTime > 60
@@ -146,7 +146,7 @@ function Withdraw() {
         </div>
 
         <button
-          className="mt-10 flex justify-center items-center font-turds text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
+          className="mt-10 flex justify-center items-center font-turds text-white text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
           onClick={withdrawCoin}
         >
           Withdraw
@@ -161,7 +161,7 @@ function Withdraw() {
                 height={40}
                 className="mr-5"
               />
-              <p className="font-turds">Withdraw successful!</p>
+              <p className="font-turds text-white">Withdraw successful!</p>
               <Image
                 src="/images/toilet.png"
                 alt="Left Image"
