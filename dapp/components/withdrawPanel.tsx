@@ -69,7 +69,7 @@ function Withdraw() {
 
   return (
     <div
-      className="text-white flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="text-white grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
       style={{
         position: "absolute",
         top: "50%",
@@ -81,7 +81,10 @@ function Withdraw() {
         <div className="mb-3 minting-container flex items-center">
           <span className="mt-10 flex justify-center items-center font-turds text-white text-xl">
             Withdrawable Ebak: &nbsp;{" "}
-            <p className="font-sans text-white text-3xl" style={{ marginTop: "-4px" }}>
+            <p
+              className="font-sans text-white text-3xl"
+              style={{ marginTop: "-4px" }}
+            >
               {withdrawAmountString}
             </p>
             <Image

@@ -99,27 +99,31 @@ export default function Home() {
     >
       <div className="absolute top-0 left-0 w-full h-20 bg-black bg-opacity-50 z-10;">
         <p className="fixed left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
-          <a
-            href="https://www.youtube.com/watch?v=Z1nufRLDQMU/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className=""
-          >
-            <Image
-              src="/images/Ebak-Icon.png"
-              alt="Ebak Logo"
-              className="mr-5"
-              width={50}
-              height={44}
-              priority
-            />
-          </a>
-          <span className="text-white font-turds text-3xl -ml-2">Ebak Coin</span>
+          <div className="flex items-center group">
+            <a
+              href="https://www.youtube.com/watch?v=Z1nufRLDQMU/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <Image
+                src="/images/Ebak-Icon.png"
+                alt="Ebak Logo"
+                className="mr-5 mb-1 group-hover:scale-105 group transition duration-300 motion-reduce:transform-none"
+                width={50}
+                height={44}
+                priority
+              />
+            </a>
+            <span className="text-white font-turds text-3xl -ml-2 group-hover:scale-105 transition duration-300 motion-reduce:transform-none">
+              Ebak Coin
+            </span>
+          </div>
           <button
             onClick={() => {
               connectWallet();
             }}
-            className="text-white font-turds text-3xl ml-auto "
+            className="text-white font-turds text-3xl ml-auto hover:scale-105 transition duration-300 motion-reduce:transform-none "
           >
             {walletKey !== "" && (
               <>
@@ -133,27 +137,27 @@ export default function Home() {
                 </span>
               </>
             )}
-            {walletKey === "" && "Connect Wallet"}
+            {walletKey === "" && <span className="">Connect Wallet</span>}
           </button>
         </p>
       </div>
 
-      <div className="text-white relative top-14 flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900">
+      <div className="text-white relative top-14 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 shadow-xl">
         <button
           className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
           >
             <Image
               src="/images/Ebak-Icon.png"
               alt="Left Image"
               width={40}
               height={40}
-              className="mr-5"
+              className="mr-5 mb-2"
             />
-            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none ">
               Mint{" "}
             </span>
           </h2>
@@ -165,7 +169,7 @@ export default function Home() {
           onClick={() => (walletKey ? setChosenButton(1) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
           >
             <Image
               src="/images/stake.png"
@@ -174,19 +178,21 @@ export default function Home() {
               height={40}
               className="mr-5"
             />
-            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
               Stake{" "}
             </span>
           </h2>
-          <p className={`m-0 text-white text-sm opacity-50`}>Eat steak and get full!</p>
+          <p className={`m-0 text-white text-sm opacity-50`}>
+            Eat steak and get full!
+          </p>
         </button>
 
         <button
-          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50 "
           onClick={() => (walletKey ? setChosenButton(2) : setChosenButton(3))}
         >
           <h2
-            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto`}
+            className={`flex items-center justify-center font-turds text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
           >
             <Image
               src="/images/toilet.png"
@@ -195,7 +201,7 @@ export default function Home() {
               height={40}
               className="mr-5"
             />
-            <span className="inline-block transition-transform group-hover:translate-y-1 motion-reduce:transform-none ">
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
               withdraw{" "}
             </span>
           </h2>

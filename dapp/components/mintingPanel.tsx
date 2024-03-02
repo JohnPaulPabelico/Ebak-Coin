@@ -85,7 +85,7 @@ function Minting() {
 
   return (
     <div
-      className="flex grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96 transition-all"
       style={{
         position: "absolute",
         top: "50%",
@@ -97,7 +97,10 @@ function Minting() {
         <div className="mb-10 minting-container flex items-center">
           <span className="mt-5 flex justify-center items-center font-turds text-white text-xl">
             Current Ebak Balance: &nbsp;{" "}
-            <p className="font-sans text-white text-3xl" style={{ marginTop: "-4px" }}>
+            <p
+              className="font-sans text-white text-3xl"
+              style={{ marginTop: "-4px" }}
+            >
               {balanceString}
             </p>
             <Image

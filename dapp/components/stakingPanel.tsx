@@ -58,7 +58,7 @@ function Staking() {
 
   return (
     <div
-      className="text-white flex grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="text-white grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
       style={{
         position: "absolute",
         top: "50%",
@@ -70,7 +70,10 @@ function Staking() {
         <div className="mb-10 minting-container flex items-center">
           <span className="mt-10 flex justify-center items-center font-turds text-xl">
             Current Ebak Staked: &nbsp;{" "}
-            <p className="text-white font-sans text-3xl" style={{ marginTop: "-4px" }}>
+            <p
+              className="text-white font-sans text-3xl"
+              style={{ marginTop: "-4px" }}
+            >
               {stakedAmountString}
             </p>
             <Image
@@ -143,7 +146,7 @@ function Staking() {
             <div className="minting-container flex items-center">
               <a
                 href={`https://sepolia.arbiscan.io/tx/${transactionHash}`}
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="font-turds text-blue-500  cursor-pointer"
               >
